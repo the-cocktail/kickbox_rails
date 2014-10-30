@@ -17,12 +17,17 @@ module Mail
 
           # fallbacks if provider return success = false
           throw Exception unless response['success']
-          
+
           response
         rescue Exception => e
           # If Kickbox service respond with Error we do fallback to basic validation
           basic_email_validation email
         end
+      end
+
+      def valid? email
+        response = validate(email)
+        response['result'] == 'valid' ? true : false
       end
 
       private
