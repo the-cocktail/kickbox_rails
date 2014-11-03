@@ -1,4 +1,6 @@
-require 'kickbox'
+require 'json'
+require 'faraday'
+require 'mail/kickbox_api'
 
 module Mail
   module Validator
@@ -8,17 +10,19 @@ module Mail
       def configure
         @configuration ||= Configuration.new
         yield(configuration)
-        @provider = Kickbox::Client.new(self.configuration.api_key).kickbox
+        @provider = KickboxApi.new(url: @configuration.api_url,
+                                      end_point: @configuration.api_resource,
+                                      token: @configuration.api_key)
       end
 
       def validate email
         begin
           response = @provider.verify(email||String.new)
-
           # fallbacks if provider return success = false
           throw Exception unless response['success']
 
           response
+
         rescue Exception => e
           # If Kickbox service respond with Error we do fallback to basic validation
           basic_email_validation email
@@ -28,6 +32,10 @@ module Mail
       def valid? email
         response = validate(email)
         response['result'] == 'valid' ? true : false
+      end
+
+      def invalid? email
+        !valid? email
       end
 
       private
@@ -48,12 +56,15 @@ module Mail
     end
 
     class Configuration
-      attr_accessor :api_key
+      attr_accessor :api_key, :api_url, :api_resource
 
       def initialize
         @api_key = nil
+        @api_url = nil
+        @api_resource = nil
       end
     end
-
   end
 end
+
+require 'mail/active_model' if defined?(::ActiveModel) && !(ActiveModel::VERSION::MAJOR < 2 || (2 == ActiveModel::VERSION::MAJOR && ActiveModel::VERSION::MINOR < 1))
