@@ -1,7 +1,7 @@
 require 'bundler'
 Bundler.setup
 
-require 'mail/validator'
+require 'kickbox_rails'
 
 Bundler.require(:test)
 

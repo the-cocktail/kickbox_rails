@@ -1,4 +1,4 @@
-require 'mail/validator'
+require 'kickbox_rails'
 require 'i18n'
 
 module ActiveModel
@@ -6,9 +6,9 @@ module ActiveModel
     class EmailFormatValidator < EachValidator
 
       DEFAULT_MESSAGE = "Email is invalid"
-      
+
       def validate_each(record, attribute, value)
-        if Mail::Validator::invalid?(value)
+        if KickboxRails::invalid?(value)
           record.errors[attribute] << (defined?(I18n) ? I18n.t(:invalid_email_address, :default => (options[:message]||DEFAULT_MESSAGE), :locale => I18n.default_locale) : (options[:message]||DEFAULT_MESSAGE))
         end
       end

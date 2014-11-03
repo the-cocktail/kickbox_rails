@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe Mail::Validator do
-  subject { Mail::Validator.new }
+describe KickboxRails do
+  subject { KickboxRails.new }
 
   describe "Configuration" do
     before do
-      Mail::Validator.configure do |config|
+      KickboxRails.configure do |config|
         config.api_key = 'example_key'
         config.api_url = 'http://example-url.com/'
         config.api_resource = 'v1/resource'
@@ -13,9 +13,9 @@ describe Mail::Validator do
     end
 
     it 'is configurable' do
-      expect(Mail::Validator.configuration.api_key).to eq('example_key')
-      expect(Mail::Validator.configuration.api_url).to eq('http://example-url.com/')
-      expect(Mail::Validator.configuration.api_resource).to eq('v1/resource')
+      expect(KickboxRails.configuration.api_key).to eq('example_key')
+      expect(KickboxRails.configuration.api_url).to eq('http://example-url.com/')
+      expect(KickboxRails.configuration.api_resource).to eq('v1/resource')
     end
   end
 
@@ -69,52 +69,52 @@ describe Mail::Validator do
     end
 
     it 'is valid with basic validation' do
-      expect(Mail::Validator.validate(valid_email)).to eq(valid_result)
+      expect(KickboxRails.validate(valid_email)).to eq(valid_result)
     end
 
     it 'is invalid with basic validation' do
-      expect(Mail::Validator.validate(invalid_email)).to eq(invalid_result)
+      expect(KickboxRails.validate(invalid_email)).to eq(invalid_result)
     end
 
     it 'is invalid with nil parameter' do
-      expect(Mail::Validator.validate(nil)).to eq(invalid_result)
+      expect(KickboxRails.validate(nil)).to eq(invalid_result)
     end
 
     it 'is valid with service validation' do
-      allow(Mail::Validator.provider).to receive(:verify).and_return(valid_service_result)
-      expect(Mail::Validator.validate(valid_email)).to eq(valid_service_result)
+      allow(KickboxRails.provider).to receive(:verify).and_return(valid_service_result)
+      expect(KickboxRails.validate(valid_email)).to eq(valid_service_result)
     end
 
     it 'is invalid with service validation' do
-      allow(Mail::Validator.provider).to receive(:verify).and_return(invalid_service_result)
-      expect(Mail::Validator.validate(valid_email)).to eq(invalid_service_result)
+      allow(KickboxRails.provider).to receive(:verify).and_return(invalid_service_result)
+      expect(KickboxRails.validate(valid_email)).to eq(invalid_service_result)
     end
 
     it 'fallbacks to valid on service error ' do
-      allow(Mail::Validator.provider).to receive(:verify).and_return(error_service_result)
-      expect(Mail::Validator.validate(valid_email)).to eq(valid_result)
+      allow(KickboxRails.provider).to receive(:verify).and_return(error_service_result)
+      expect(KickboxRails.validate(valid_email)).to eq(valid_result)
     end
 
     it 'fallbacks to invalid on service error ' do
-      allow(Mail::Validator.provider).to receive(:verify).and_return(error_service_result)
-      expect(Mail::Validator.validate(invalid_email)).to eq(invalid_result)
+      allow(KickboxRails.provider).to receive(:verify).and_return(error_service_result)
+      expect(KickboxRails.validate(invalid_email)).to eq(invalid_result)
     end
 
     it 'fallbacks to invalid on nil value and service error ' do
-      allow(Mail::Validator.provider).to receive(:verify).and_return(error_service_result)
-      expect(Mail::Validator.validate(nil)).to eq(invalid_result)
+      allow(KickboxRails.provider).to receive(:verify).and_return(error_service_result)
+      expect(KickboxRails.validate(nil)).to eq(invalid_result)
     end
 
     it 'is valid? eq true' do
-      expect(Mail::Validator.valid?(valid_email)).to eq(true)
+      expect(KickboxRails.valid?(valid_email)).to eq(true)
     end
 
     it 'is valid? eq false' do
-      expect(Mail::Validator.valid?(invalid_email)).to eq(false)
+      expect(KickboxRails.valid?(invalid_email)).to eq(false)
     end
 
     it 'is valid? eq false with nil parameter' do
-      expect(Mail::Validator.valid?(nil)).to eq(false)
+      expect(KickboxRails.valid?(nil)).to eq(false)
     end
   end
 end

@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'mail/validator/version'
+require 'kickbox_rails/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "mail-validator"
-  spec.version       = Mail::Validator::VERSION
+  spec.name          = "kickbox_rails"
+  spec.version       = KickboxRails::VERSION
   spec.authors       = ["Samuel Navas"]
   spec.email         = ["samuel.navas@the-cocktail.com"]
-  spec.summary       = %q{email validations}
-  spec.description   = %q{Validates email against Kickbox service or similar}
+  spec.summary       = %q{email validation using kikbox.io service}
+  spec.description   = %q{Validates email against Kickbox.io service}
   spec.homepage      = ""
   spec.license       = "MIT"
 
