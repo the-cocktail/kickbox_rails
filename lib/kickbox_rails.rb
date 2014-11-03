@@ -18,7 +18,6 @@ module KickboxRails
     def validate email
       begin
         response = @provider.verify(email||String.new)
-        puts "llamamos a api y devuelve #{response}"
         # fallbacks if provider return success = false
         throw Exception unless response['success']
 

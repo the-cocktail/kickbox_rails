@@ -8,7 +8,7 @@ module ActiveModel
       DEFAULT_MESSAGE = "Email is invalid"
 
       def validate_each(record, attribute, value)
-        if KickboxRails::invalid?(value)
+        if KickboxRails.invalid?(value)
           record.errors[attribute] << (defined?(I18n) ? I18n.t(:invalid_email_address, :default => (options[:message]||DEFAULT_MESSAGE), :locale => I18n.default_locale) : (options[:message]||DEFAULT_MESSAGE))
         end
       end
