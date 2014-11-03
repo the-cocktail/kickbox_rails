@@ -7,11 +7,15 @@ describe Mail::Validator do
     before do
       Mail::Validator.configure do |config|
         config.api_key = 'example_key'
+        config.api_url = 'http://example-url.com/'
+        config.api_resource = 'v1/resource'
       end
     end
 
     it 'is configurable' do
       expect(Mail::Validator.configuration.api_key).to eq('example_key')
+      expect(Mail::Validator.configuration.api_url).to eq('http://example-url.com/')
+      expect(Mail::Validator.configuration.api_resource).to eq('v1/resource')
     end
   end
 

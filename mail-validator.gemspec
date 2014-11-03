@@ -22,6 +22,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
 
-  spec.add_dependency "kickbox"
+  spec.add_dependency 'i18n'
+  spec.add_dependency "faraday"
+  spec.add_dependency "json"
 
 end
