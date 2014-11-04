@@ -21,9 +21,9 @@ Execute next command for generate initializer kickbox_rails.rb, where you can co
 
     # Rails
     class Person < ActiveRecord::Base
-      validates_email_format :email
+      validates_kickbox_email_format :email
       # OR
-      validates :email, email_format: { message: 'Email is invalid' }
+      validates :email, kickbox_email_format: { message: 'Email is invalid' }
     end
 
     # Non Rails

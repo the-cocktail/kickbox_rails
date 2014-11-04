@@ -3,7 +3,7 @@ require 'i18n'
 
 module ActiveModel
   module Validations
-    class EmailFormatValidator < EachValidator
+    class KickboxEmailFormatValidator < EachValidator
 
       DEFAULT_MESSAGE = "Email is invalid"
 
@@ -15,8 +15,8 @@ module ActiveModel
     end
 
     module HelperMethods
-      def validates_email_format(*attr_names)
-        validates_with EmailFormatValidator, _merge_attributes(attr_names)
+      def validates_kickbox_email_format(*attr_names)
+        validates_with KickboxEmailFormatValidator, _merge_attributes(attr_names)
       end
     end
   end
