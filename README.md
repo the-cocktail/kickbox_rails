@@ -7,7 +7,7 @@ Validate emails using Kickbox.io API in Ruby on Rails and fallback to basic synt
 
 Add this line to your application's Gemfile:
 
-    gem 'kickbox_rails', :git => 'git://github.com/the-cocktail/kickbox_rails.git'
+    gem 'kickbox_rails'
 
 And then execute:
 
