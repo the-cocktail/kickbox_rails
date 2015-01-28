@@ -12,6 +12,7 @@ class KickboxApi
   end
 
   def verify email
+    email = CGI.escape(email) #Prepare email for URL encoding
     begin
       response = @conn.get do |req|
         req.url "#{@end_point}?email=#{email}&apikey=#{@token}"
