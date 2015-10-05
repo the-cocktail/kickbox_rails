@@ -4,4 +4,5 @@ KickboxRails.configure do |config|
   config.api_url = 'https://api.kickbox.io'
   config.api_resource = '/v1/verify'
   config.api_key = 'API_KEY_HERE'
+  config.treat_unknown_as_valid = false
 end

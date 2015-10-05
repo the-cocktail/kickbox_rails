@@ -31,7 +31,15 @@ module KickboxRails
 
     def valid? email
       response = validate(email)
-      response['result'] == 'valid' ? true : false
+      valid_response?(response['result'])
+    end
+
+    def valid_response?(response)
+      if @configuration.treat_unknown_as_valid
+        [ 'valid', 'unknown' ].include?(response['result'])
+      else
+        [ 'valid' ].include?(response['result'])
+      end
     end
 
     def invalid? email
@@ -56,12 +64,13 @@ module KickboxRails
   end
 
   class Configuration
-    attr_accessor :api_key, :api_url, :api_resource
+    attr_accessor :api_key, :api_url, :api_resource, :treat_unknown_as_valid
 
     def initialize
       @api_key = nil
       @api_url = nil
       @api_resource = nil
+      @treat_unknown_as_valid = false
     end
   end
 end
