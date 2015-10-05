@@ -31,7 +31,7 @@ module KickboxRails
 
     def valid? email
       response = validate(email)
-      valid_response?(response['result'])
+      valid_response?(response)
     end
 
     def valid_response?(response)
