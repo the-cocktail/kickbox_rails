@@ -15,7 +15,7 @@ class KickboxApi
     email = CGI.escape(email) #Prepare email for URL encoding
     begin
       response = @conn.get do |req|
-        req.url "#{@end_point}?email=#{email}&apikey=#{@token}"
+        req.url "#{@end_point}?email=#{CGI::escape(email)}&apikey=#{@token}"
         req.options.timeout = 2
         req.options.open_timeout = 2
       end
