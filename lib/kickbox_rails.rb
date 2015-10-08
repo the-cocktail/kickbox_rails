@@ -19,7 +19,7 @@ module KickboxRails
       begin
         response = @provider.verify(email||String.new)
         # fallbacks if provider return success = false
-        throw Exception unless response['success']
+        throw Exception unless response['success'] == 'true' || response['success'] == true
 
         response
 
